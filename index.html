@@ -342,6 +342,7 @@ function detectRegion(){
 document.querySelector('.tabs').innerHTML=IND.map(i=>'<button type="button" role="tab" class="tab" data-id="'+i.id+'">'+svg(i)+i.name+'</button>').join('');
 document.querySelector('.tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(b){cur=b.dataset.id;panel();}});
 setRegion(detectRegion());
+window.addEventListener('hashchange',()=>{const h=(location.hash||'').toLowerCase();if(['#dubai','#uae','#india'].includes(h))setRegion(detectRegion());});
 panel();
 const vids=[...document.querySelectorAll('video')];
 if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting){v.play().catch(()=>{})}else{v.pause()}}),{threshold:.25});vids.forEach(v=>io.observe(v));}
