@@ -112,6 +112,16 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between}
 @media (max-width:560px){.tabs{flex-wrap:nowrap;overflow-x:auto;margin-inline:-20px;padding:2px 20px 6px}.tab{flex:none}.hide-sm{display:none}.brand span{display:none}.styles{grid-template-columns:1fr 1fr;gap:10px}.style h3{font-size:15px}.style p{font-size:13px}.brand{font-size:16px}.brand img{width:44px;height:30px}}
 @media (max-width:480px){.g4{grid-template-columns:1fr}}
 </style>
+<!-- Meta Pixel: HoH Software Solutions - Reel Studio (separate from the houseofhelps.com car-wash pixel) -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','4080584462249659');fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=4080584462249659&ev=PageView&noscript=1"></noscript>
 </head>
 <body>
 <header>
@@ -317,6 +327,9 @@ let region='in', cur='car';
 const svg=i=>'<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+i.icon+'</svg>';
 const wa=m=>'https://wa.me/'+NUM+'?text='+encodeURIComponent((region==='ae'?'(UAE) ':'')+m);
 function links(){document.querySelectorAll('[data-wa]').forEach(a=>{a.href=wa(a.dataset.wa)});}
+// Meta Pixel: count every WhatsApp button tap as a 'Contact' (works for buttons added later too)
+document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('[data-wa]');if(!a)return;
+ try{fbq('track','Contact',{content_name:(a.innerText||a.getAttribute('aria-label')||'WhatsApp').trim().slice(0,60),content_category:region==='ae'?'UAE':'India',currency:region==='ae'?'AED':'INR'})}catch(err){}});
 function panel(){
  const i=IND.find(x=>x.id===cur);
  document.getElementById('bizpanel').innerHTML=
